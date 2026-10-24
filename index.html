@@ -53,7 +53,7 @@ function stopTeacherVoice(){speechSynthesis.cancel();if(voiceRequestAborter){voi
 function nativeVietnameseFemale(text){
   stopTeacherVoice();
   const utterance=new SpeechSynthesisUtterance(text);
-  utterance.lang='vi-VN';utterance.rate=.72;utterance.pitch=.96;utterance.volume=.74;
+  utterance.lang='vi-VN';utterance.rate=.69;utterance.pitch=1.1;utterance.volume=.68;
   const voices=speechSynthesis.getVoices();
   const vietnamese=voices.filter(v=>/^vi([_-]VN)?$/i.test(v.lang)||/vietnam/i.test(v.name));
   const female=vietnamese.find(v=>/hoai|my|female|nữ|nu/i.test(v.name))||vietnamese[0];
@@ -74,7 +74,7 @@ async function playGentleAudio(blob,requestId){
   if(requestId!==voiceRequestNumber)return;
   if(activeTeacherAudio){activeTeacherAudio.pause();activeTeacherAudio.currentTime=0;}
   if(activeAudioUrl)URL.revokeObjectURL(activeAudioUrl);
-  activeAudioUrl=URL.createObjectURL(blob);const audio=new Audio(activeAudioUrl);activeTeacherAudio=audio;audio.volume=.72;
+  activeAudioUrl=URL.createObjectURL(blob);const audio=new Audio(activeAudioUrl);activeTeacherAudio=audio;audio.volume=.68;
   audio.onended=()=>{if(requestId===voiceRequestNumber){activeTeacherAudio=null;URL.revokeObjectURL(activeAudioUrl);activeAudioUrl='';setVoiceStatus('Cô đã đọc xong. Bé có thể nghe lại khi muốn.','ok');}};
   audio.onerror=()=>{if(requestId===voiceRequestNumber)setVoiceStatus('Âm thanh chưa phát được. Cô kiểm tra âm lượng rồi bấm lại nhé.','error');};
   await audio.play();if(requestId===voiceRequestNumber)setVoiceStatus('Cô đang đọc thật chậm và nhẹ nhàng…','ok');
@@ -90,7 +90,7 @@ async function playTeacherVoice(text){
     setVoiceStatus('Cô đang chuẩn bị giọng đọc…','wait');
     if(gentleVoiceCache.has(signature)){await playGentleAudio(gentleVoiceCache.get(signature),requestId);return;}
     voiceRequestAborter=new AbortController();
-    const response=await fetch('https://api.openai.com/v1/audio/speech',{method:'POST',signal:voiceRequestAborter.signal,headers:{'Content-Type':'application/json','Authorization':'Bearer '+st.key},body:JSON.stringify({model:'gpt-4o-mini-tts',voice:st.voice||'shimmer',input:text,instructions:'Đọc bằng giọng nữ Việt Nam hiền hòa như cô giáo mầm non đang nói nhỏ bên cạnh bé. Âm lượng nhỏ vừa, mềm, ấm và dịu; cao độ trung bình thấp, tốc độ chậm rãi. Không đọc dồn dập, không dữ, không hô hào, không giọng quảng cáo, không nhấn mạnh cuối câu. Mỗi câu ngắn, nghỉ nhẹ sau dấu chấm. Phát âm tên chữ cái theo tiếng Việt chuẩn: bê, xê, dê, đê, em mờ, en nờ.'})});
+    const response=await fetch('https://api.openai.com/v1/audio/speech',{method:'POST',signal:voiceRequestAborter.signal,headers:{'Content-Type':'application/json','Authorization':'Bearer '+st.key},body:JSON.stringify({model:'gpt-4o-mini-tts',voice:'marin',response_format:'wav',input:text,instructions:'Đọc bằng giọng nữ trẻ, đáng yêu và thật dịu dàng như cô giáo mầm non đang trò chuyện riêng với một em bé. Âm sắc sáng, mềm, trong; luôn mỉm cười nhẹ nhưng không cường điệu. Đọc chậm khoảng bảy mươi phần trăm tốc độ hội thoại thông thường. Tuyệt đối không gằn giọng, không nghiêm nghị, không hô hào, không thúc giục, không đọc kiểu quảng cáo. Hạ nhẹ âm lượng ở cuối câu. Nghỉ rõ sau mỗi dấu chấm. Phát âm tiếng Việt tự nhiên và tên chữ cái chuẩn: bê, xê, dê, đê, em mờ, en nờ.'})});
     if(!response.ok)throw new Error('API '+response.status);
     const blob=await response.blob();if(requestId!==voiceRequestNumber)return;gentleVoiceCache.set(signature,blob);if(gentleVoiceCache.size>36)gentleVoiceCache.delete(gentleVoiceCache.keys().next().value);await playGentleAudio(blob,requestId);
   }catch(error){
@@ -182,4 +182,7 @@ function resizeTraceCanvas(){const r=canvas.getBoundingClientRect();if(!r.width|
 removeEventListener('resize',resize);addEventListener('resize',resizeTraceCanvas);
 const existingShow=window.show;window.show=(id)=>{existingShow(id);if(id==='draw')requestAnimationFrame(resizeTraceCanvas);};
 renderPictureFlash();window.renderReadCard();window.newQuest();renderTracePicker();setTraceLetter('a');
+</script><script>
+/* Hồ sơ giọng mầm non v3: bỏ lựa chọn cũ có thể cho âm sắc gắt và đồng bộ mọi thiết bị sang Marin. */
+(()=>{const select=document.getElementById('voiceName');if(select)select.innerHTML='<option value="marin">Nữ dịu dàng, chậm rãi — dành cho trẻ mầm non</option>';try{const saved=JSON.parse(localStorage.getItem('beVuiSettings')||'{}');if(saved.mode==='openai'&&saved.key){saved.voice='marin';saved.gentleVoiceProfile='v3';localStorage.setItem('beVuiSettings',JSON.stringify(saved));}}catch(e){}const status=document.getElementById('voiceStatus');if(status&&!status.textContent.includes('AI'))status.textContent='Giọng đọc được tạo bởi AI và đã được đặt ở chế độ nữ dịu dàng, chậm rãi.';})();
 </script></body></html>
