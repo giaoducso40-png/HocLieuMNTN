@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Andika:wght@400;700&display=swap');
+:root{--good:#198861;--retry:#b66a21;--learning-font:'Andika','Comic Sans MS','Comic Sans',cursive}
+/* Mặt chữ học liệu: Andika là font chuyên cho người mới học đọc, dùng a/g một tầng. */
+.letter-main,.letter-cap,.big-letter,.read-letter,.flash-letter,.flip-answers button,.hunt-letter,.answer-row .choice,.trace-choice,.trace-guide{font-family:var(--learning-font)!important;font-style:normal;font-variant:normal;font-feature-settings:normal;font-synthesis:none}
+.letter-main,.big-letter,.read-letter,.flash-letter,.trace-guide{font-weight:700!important}
+.letter-cap{font-weight:400!important}
+.hero{min-height:420px;padding-right:min(38%,420px);background:linear-gradient(120deg,#7252cc 0%,#a86ee0 58%,#f599a5 100%)}
+.hero h1,.hero p,.hero .start{position:relative;z-index:2}.hero h1{max-width:580px;color:#fff;text-shadow:0 4px 0 #6545b1}.hero p{max-width:500px;color:#fff;font-weight:800;text-shadow:0 1px 2px #5c408b80}
+.hero:after{content:'a  ă  â  1  2  3';right:15px;bottom:8px;font-size:clamp(3rem,8vw,7rem);opacity:.5;z-index:0}
+.hero-characters{position:absolute;right:0;bottom:0;width:43%;height:100%;z-index:1;pointer-events:none}
+.hero-teacher{position:absolute;bottom:-5px;right:13%;height:105%;max-width:80%;object-fit:contain;object-position:bottom;filter:drop-shadow(0 12px 12px #442c6c45)}
+.hero-squirrel{position:absolute;bottom:2px;right:0;width:39%;max-height:42%;object-fit:contain;filter:drop-shadow(0 8px 5px #513b7338)}
+.mascot-card .mascot{width:168px;height:168px;object-fit:contain;font-size:initial;right:10px;bottom:-3px}
+.mascot-card .task-audio{position:relative;z-index:2;max-width:calc(100% - 130px)}
+.lesson-art{width:min(100%,220px);height:200px;object-fit:contain;display:block;margin:10px auto;filter:drop-shadow(0 8px 7px #36517622)}
+.lesson .big-letter{font-family:'Noto Sans',sans-serif;font-weight:750}
+.game-side,.game-play{min-width:0}
+.game-side p,.game-play p{line-height:1.5}
+.game-tab,.go,.choice,.mic-button,.listen-orb,.number-answer button,.hunt-letter,.number-hunt button{touch-action:manipulation}
+.feedback{min-height:58px;padding:10px 12px;border-radius:17px;background:#f1f7ff;color:#31536c;line-height:1.4;display:flex;align-items:center;justify-content:center;text-align:center}
+.feedback[data-result="correct"]{background:#dff8e9;color:#126542;border:2px solid #7dccaa}
+.feedback[data-result="retry"]{background:#fff0dc;color:#875013;border:2px solid #efc683}
+.feedback[data-result="listen"]{background:#e8f4ff;color:#315880;border:2px solid #b9dcfb}
+.round-stats{font-weight:850;font-size:.92rem;color:#526783;min-height:25px;margin:5px 0}
+.word-picture{display:block;width:min(100%,205px);height:175px;object-fit:contain;margin:0 auto 8px;filter:drop-shadow(0 8px 6px #6a5d6928)}
+.word-stage #quest{font-family:'Baloo 2';font-size:1.25rem;line-height:1.4;text-align:center}
+.read-window{max-width:460px;min-height:280px;grid-template-columns:36% 64%;grid-template-rows:1fr auto;border:5px solid #fff8e9;background:linear-gradient(160deg,#fff8d9,#fff);padding:18px}
+.read-letter{font-family:'Noto Sans',sans-serif;grid-row:1 / 3;font-size:clamp(6rem,10vw,9rem);font-weight:750;line-height:1;color:#df625d}
+.read-art{grid-column:2;grid-row:1;width:100%;height:190px;max-width:225px;justify-self:center}
+.read-word{grid-column:2;grid-row:2;text-align:center;font-size:1.5rem}
+.flash-wrap{gap:12px}.picture-flash{height:330px;width:min(100%,390px)}
+.picture-flash .front{background:linear-gradient(140deg,#fff9d9,#dcefff);display:flex;flex-direction:column;color:#425d79;font-size:1.1rem;padding:15px;gap:4px;text-shadow:none}
+.picture-flash .front img{width:100%;height:240px;object-fit:contain;filter:drop-shadow(0 9px 7px #37527332)}
+.picture-flash .back{display:flex;flex-direction:column;gap:1px;background:#fff8e3;color:#345274}
+.picture-flash .back .flash-letter{font:750 6rem/1 'Noto Sans',sans-serif;color:#e86764}
+.picture-flash .back img{width:120px;height:110px}.picture-flash .back span{font-size:1.3rem}
+.flip-answers{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}.flip-answers button{min-width:62px;min-height:58px;font:750 2rem 'Noto Sans',sans-serif;border-radius:16px;background:#dff2ff;color:#385d8b;border:3px solid white;box-shadow:0 4px #bbd3e6}
+.flip-answers button:disabled,.answer-row button:disabled,.number-answer button:disabled,.hunt-board button:disabled,.number-hunt button:disabled{opacity:.7;cursor:default}
+.flash-instruction{font-weight:850;text-align:center}.flash-wrap .feedback{width:min(100%,440px)}
+.hunt-board{grid-template-columns:repeat(4,minmax(0,1fr));width:100%;max-width:310px}.hunt-letter{min-width:0}
+.number-hunt{grid-template-columns:repeat(5,minmax(0,1fr));width:100%}.number-hunt button{min-width:0}
+.trace-start{display:none!important}.trace-board>p{pointer-events:none;bottom:0;left:0;right:0;border-radius:0;background:#ffffffc9}
+.trace-guide{font-family:'Noto Sans',sans-serif;font-weight:750;opacity:.8}
+.trace-board .canvas{cursor:crosshair}.trace-tools{min-width:0}
+.task-audio{background:#fff1c2;border-radius:14px;padding:9px 12px;display:inline-flex;align-items:center;gap:6px;box-shadow:0 4px #dcc895;margin:7px 4px 7px 0}
+.task-audio:focus-visible,.flip-answers button:focus-visible,.letter:focus-visible{outline:4px solid #634fba;outline-offset:3px}
+@media(max-width:760px){.hero{min-height:490px;padding:25px 20px 210px}.hero h1{font-size:clamp(2.1rem,9vw,3.3rem)}.hero p{font-size:1rem;max-width:100%;line-height:1.35}.hero-characters{height:230px;width:100%;right:0;bottom:0}.hero-teacher{height:240px;right:15%;max-width:56%}.hero-squirrel{height:120px;width:125px;right:2%;bottom:4px}.read-window{max-width:350px;min-height:225px;grid-template-columns:36% 64%}.read-art{height:145px}.read-letter{font-size:6rem}.read-word{font-size:1.1rem}.picture-flash{height:300px}.picture-flash .front img{height:200px}}
+@media(max-width:380px){.game-play,.game-side{padding:14px}.hunt-board{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.hunt-letter{height:48px;font-size:1.55rem}.number-hunt{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}.number-hunt button{height:52px;font-size:1.45rem}.letter{height:220px}.trace-letter-picker{grid-template-columns:repeat(5,1fr)}}
